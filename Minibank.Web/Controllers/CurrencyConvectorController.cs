@@ -20,14 +20,14 @@ namespace Minibank.Web.Controllers
         [HttpGet]
         public int Get(int currency)
         {
-            var output = _convector.Convert(currency);
             if (currency >= 0)
             {
+                var output = _convector.Convert(currency);
                 return output;
             }
             else
             {
-                throw new Exception();
+                throw new UserFriendlyException("Negative number");
             }
 
         }

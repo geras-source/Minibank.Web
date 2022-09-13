@@ -9,9 +9,14 @@ namespace Minibank.Data
 {
     public class Course : ICourse
     {
+        private readonly Random _random;
+        public Course()
+        {
+            _random = new Random();
+        }
         public int Get()
         {
-            return 60;
+            return _random.Next();
         }
     }
 }
