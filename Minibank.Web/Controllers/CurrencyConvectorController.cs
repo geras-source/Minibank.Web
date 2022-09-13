@@ -27,7 +27,7 @@ namespace Minibank.Web.Controllers
             }
             else
             {
-                throw new Exception("Negative number");
+                throw new UserFriendlyException("Negative number");
             }
 
         }
