@@ -8,6 +8,6 @@ namespace Minibank.Core
 {
     public interface IConvector
     {
-        int Convert(int cash);
+        double Convert(double amount, string fromCurrency, string toCurrency);
     }
 }
