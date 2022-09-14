@@ -37,13 +37,17 @@ namespace Minibank.Web
             });
 
             services.AddSingleton<IConvector, Convector>();
-            services.AddSingleton<ICourse, Course>();
+
+            services.AddHttpClient<ICourse, CourseHttpProvider>(option =>
+            {
+                option.BaseAddress = new Uri(Configuration["CurrencyUri"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseMiddleware<UserFriendlyExceptionMiddleware>();
+            app.UseMiddleware<ValidationExceptionMiddleware>();
 
             if (env.IsDevelopment())
             {
