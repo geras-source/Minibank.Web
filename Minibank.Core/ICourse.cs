@@ -8,6 +8,6 @@ namespace Minibank.Core
 {
     public interface ICourse
     {
-        double GetRubleCourse(string currencyCode);
+        int Get();
     }
 }

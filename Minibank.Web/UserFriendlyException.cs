@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Minibank.Web
 {
-    public class ValidationException : Exception
+    public class UserFriendlyException : Exception
     {
-        public ValidationException(string message) : base(message) { }
+        public UserFriendlyException(string message) : base(message) { }
     }
 }

@@ -14,14 +14,11 @@ namespace Minibank.Core
         {
             _course = course;
         }
-        public double Convert(double amount, string fromCurrency, string toCurrency)
+        public int Convert(int cash)
         {
-            var valueFromCurrency = _course.GetRubleCourse(fromCurrency);
-            var valueToCurrency = _course.GetRubleCourse(toCurrency);
+            var value = _course.Get();
 
-            var ratio = valueFromCurrency / valueToCurrency;
-
-            return amount * ratio;
+            return cash / value;
         }
     }
 }

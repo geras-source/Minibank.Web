@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Minibank.Web.Middlevares
 {
-    public class ValidationExceptionMiddleware
+    public class UserFriendlyExceptionMiddleware
     {
         public readonly RequestDelegate next;
 
-        public ValidationExceptionMiddleware(RequestDelegate next)
+        public UserFriendlyExceptionMiddleware(RequestDelegate next)
         {
             this.next = next;
         }
@@ -21,7 +21,7 @@ namespace Minibank.Web.Middlevares
             {
                 await next(context);
             }
-            catch (ValidationException exception)
+            catch (UserFriendlyException exception)
             {
                 await context.Response.WriteAsync($"Exception: {exception.Message}");
             }
