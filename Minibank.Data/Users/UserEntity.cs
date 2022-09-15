@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Minibank.Web.Entities
+namespace Minibank.Data.Users
 {
-    public class User
+    class UserEntity
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Login { get; set; }
         public string Email { get; set; }
     }

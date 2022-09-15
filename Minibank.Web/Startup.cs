@@ -29,19 +29,15 @@ namespace Minibank.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minibank.Web", Version = "v1" });
             });
 
-            services.AddSingleton<IConvector, Convector>();
-
-            services.AddHttpClient<ICourse, CourseHttpProvider>(option =>
-            {
-                option.BaseAddress = new Uri(Configuration["CurrencyUri"]);
-            });
+            services
+                .AddData(Configuration)
+                .AddCore(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

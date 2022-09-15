@@ -20,7 +20,7 @@ namespace Minibank.Data
             var result = _httpClient.GetFromJsonAsync<CourseResponse>("daily_json.js")
                 .GetAwaiter().GetResult();
 
-            return result.Valute[currencyCode].Value;
+            return result.Valute[currencyCode].Value / result.Valute[currencyCode].Nominal;
         }
     }
 }
