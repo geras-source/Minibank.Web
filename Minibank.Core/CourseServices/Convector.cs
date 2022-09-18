@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Minibank.Core
+﻿namespace Minibank.Core
 {
     public class Convector : IConvector
     {
@@ -16,11 +10,18 @@ namespace Minibank.Core
         }
         public double Convert(double amount, string fromCurrency, string toCurrency)
         {
-            var valueFromCurrency = _course.GetRubleCourse(fromCurrency);
-            var valueToCurrency = _course.GetRubleCourse(toCurrency);
+            double valueFromCurrency = 1, valueToCurrency = 1;
 
+            if (fromCurrency != "RUB")
+            {
+                valueFromCurrency = _course.GetRubleCourse(fromCurrency);
+            }
+            if(toCurrency != "RUB")
+            {
+                valueToCurrency = _course.GetRubleCourse(toCurrency);
+            }
             var ratio = valueFromCurrency / valueToCurrency;
-
+            
             return amount * ratio;
         }
     }

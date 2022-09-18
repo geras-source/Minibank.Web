@@ -28,13 +28,14 @@ namespace Minibank.Web.Controllers.Users
 
             return new UserDto
             {
+                Id = entity.Id,
                 Login = entity.Login,
                 Email = entity.Email
             };
         }
         [HttpGet("GetAll")]
         public IEnumerable<UserDto> GetUers() {
-            return _userServices.GetUsers().Select(it => new UserDto
+            return _userServices.GetUsers().Select(it => new UserDto()
             {
                 Id = it.Id,
                 Login = it.Login,

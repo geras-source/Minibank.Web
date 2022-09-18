@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Minibank.Core.Domains.Users.Services;
+using Minibank.Core.Domains.Account.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace Minibank.Core
         {
             services
                 .AddScoped<IConvector, Convector>()
-                .AddScoped<IUserServices, UserServices>();   
+                .AddScoped<IUserServices, UserServices>()
+                .AddScoped<IAccountServices, AccountServices>();   
 
             return services;
         }

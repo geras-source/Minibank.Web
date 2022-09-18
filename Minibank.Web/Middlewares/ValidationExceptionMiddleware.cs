@@ -23,6 +23,7 @@ namespace Minibank.Web.Middlevares
             }
             catch (ValidationException exception)
             {
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync($"Exception: {exception.Message}");
             }
         }

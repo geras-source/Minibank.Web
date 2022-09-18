@@ -3,8 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Minibank.Core;
 using Minibank.Core.Repositories;
 using Minibank.Data.Users.Repositories;
+using Minibank.Core.Domains.Account.Repositories;
 using System;
-    
+using Minibank.Data.Account.Repositories;
+
 namespace Minibank.Data
 {
     public static class Bootstraps
@@ -16,7 +18,9 @@ namespace Minibank.Data
                 option.BaseAddress = new Uri(configuration["CurrencyUri"]);
             });
 
-            services.AddScoped<IUserRepository, UserRepotitory>();
+            services
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IBankAccountRepository, BankAccountRepository>();
 
             return services;
         }

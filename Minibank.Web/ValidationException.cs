@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Minibank.Web
 {
-    public class ValidationException : Exception
+    public class ValidationException : System.ComponentModel.DataAnnotations.ValidationException
     {
         public ValidationException(string message) : base(message) { }
     }

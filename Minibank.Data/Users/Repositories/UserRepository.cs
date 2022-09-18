@@ -6,7 +6,7 @@ using Minibank.Core.Repositories;
 
 namespace Minibank.Data.Users.Repositories
 {
-    class UserRepotitory : IUserRepository
+    class UserRepository : IUserRepository
     {
         private static List<UserEntity> _userEntity = new List<UserEntity>();
 
@@ -41,6 +41,7 @@ namespace Minibank.Data.Users.Repositories
 
             return new User
             {
+                Id = entity.Id,
                 Login = entity.Login,
                 Email = entity.Email
             };
