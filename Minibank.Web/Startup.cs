@@ -37,7 +37,7 @@ namespace Minibank.Web
 
             services
                 .AddData(Configuration)
-                .AddCore(Configuration);
+                .AddCore();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,29 +15,29 @@ namespace Minibank.Core.Domains.Users.Services
         {
             _userRepository = userRepository;
         }
-        public void Create(User user)
+        public async Task CreateAsync(User user)
         {
-            _userRepository.Create(user);
+            await _userRepository.CreateAsync(user);
         }
 
-        public void Delete(string id)
+        public async Task DeleteAsync(int id)
         {
-            _userRepository.Delete(id);
+            await _userRepository.DeleteAsync(id);
         }
 
-        public User Get(string id)
+        public async Task<User> GetAsync(int id)
         {
-            return _userRepository.Get(id);
+            return await _userRepository.GetAsync(id);
         }
 
-        public IEnumerable<User> GetUsers()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return _userRepository.GetUsers();
+            return await _userRepository.GetUsersAsync();
         }
 
-        public void Update(User user)
+        public async Task UpdateAsync(User user)
         {
-            _userRepository.Update(user);
+            await _userRepository.UpdateAsync(user);
         }
     }
 }

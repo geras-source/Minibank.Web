@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Minibank.Core.Domains.Users;
 using Minibank.Core.Repositories;
 
@@ -8,34 +10,38 @@ namespace Minibank.Data.Users.Repositories
 {
     class UserRepository : IUserRepository
     {
-        private static List<UserEntity> _userEntity = new List<UserEntity>();
+        private readonly ApplicationContext _context;
 
-        public void Create(User user)
+        public UserRepository(ApplicationContext context)
+        {
+            _context = context;
+        }
+        public async Task CreateAsync(User user)
         {
             var entity = new UserEntity
             {
-                Id = Guid.NewGuid().ToString(),
                 Login = user.Login,
                 Email = user.Email
             };
 
-            _userEntity.Add(entity);
-
+            await _context.Users.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(string id)
+        public async Task DeleteAsync(int id)
         {
-            var entity = _userEntity.FirstOrDefault(it => it.Id == id);
+            var entity = await _context.Users.FirstOrDefaultAsync(it => it.Id == id);
 
             if(entity != null)
             {
-                _userEntity.Remove(entity);
+                _context.Remove(entity);
+                await _context.SaveChangesAsync();
             }
         }
 
-        public User Get(string id)
+        public async Task<User> GetAsync(int id)
         {
-            var entity = _userEntity.FirstOrDefault(it => it.Id == id);
+            var entity = await _context.Users.FindAsync(id);
 
             if (entity == null) { return null; }
 
@@ -47,24 +53,25 @@ namespace Minibank.Data.Users.Repositories
             };
         }
 
-        public IEnumerable<User> GetUsers()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return _userEntity.Select(it => new User()
+            return await _context.Users.Select(it => new User()
             {
                 Id = it.Id,
                 Login = it.Login,
                 Email = it.Email
-            });
+            }).ToListAsync();
         }
 
-        public void Update(User user)
+        public async Task UpdateAsync(User user)
         {
-            var entity = _userEntity.FirstOrDefault(it => it.Id == user.Id);
-
+            var entity = await _context.Users.SingleAsync(it => it.Id == user.Id);
+            
             if(entity != null)
             {
                 entity.Login = user.Login;
                 entity.Email = user.Email;
+                await _context.SaveChangesAsync();
             }
         }
     }

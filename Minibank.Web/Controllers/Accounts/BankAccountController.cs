@@ -50,17 +50,17 @@ namespace Minibank.Web.Controllers.Accounts
             });
         }
         [HttpGet("Calculate")]
-        public int CalculatingTheCommission(double amount, string fromAccountId, string toAccountId)
+        public int CalculatingTheCommission(double amount, int fromAccountId, int toAccountId)
         {
             return _accountServices.CalculatingTheCommission(amount, fromAccountId, toAccountId);
         }
         [HttpPost("Transfer")]
-        public void TransferAMoney(double amount, string fromAccountId, string toAccountId)
+        public void TransferAMoney(double amount, int fromAccountId, int toAccountId)
         {
             _accountServices.TransferAMoney(amount, fromAccountId, toAccountId);
         }
         [HttpPut("Close")]
-        public void CloseAnAccount(string id, BankAccount bankAccount)
+        public void CloseAnAccount(int id, BankAccount bankAccount)
         {
             _accountServices.CloseAnAccount(id, bankAccount);
         }

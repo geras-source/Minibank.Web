@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using Minibank.Core.Domains.Users;
 using Minibank.Core.Domains.Users.Services;
 using System;
@@ -20,22 +21,22 @@ namespace Minibank.Web.Controllers.Users
         }
 
         [HttpGet("Get")]
-        public UserDto Get(string id)
+        public async Task<UserDto> GetAsync(int id)
         {
-            var entity = _userServices.Get(id);
+            var entity = await _userServices.GetAsync(id);
 
             if(entity == null) { return null; }
 
             return new UserDto
             {
-                Id = entity.Id,
                 Login = entity.Login,
                 Email = entity.Email
             };
         }
         [HttpGet("GetAll")]
-        public IEnumerable<UserDto> GetUers() {
-            return _userServices.GetUsers().Select(it => new UserDto()
+        public async Task<IEnumerable<UserDto>> GetUsersAsync() {
+            var result = await _userServices.GetUsersAsync();
+            return result.Select(it => new UserDto()
             {
                 Id = it.Id,
                 Login = it.Login,
@@ -43,18 +44,18 @@ namespace Minibank.Web.Controllers.Users
             });
         }
         [HttpPost("Create")]
-        public void Create(UserDto entity)
+        public async Task CreateAsync(UserDto entity)
         {
-            _userServices.Create(new User
+            await _userServices.CreateAsync(new User
             {
                 Login = entity.Login,
                 Email = entity.Email
             });
         }
         [HttpPut("Update")]
-        public void Update(string id,UserDto entity)
+        public async Task UpdateAsync(string id,UserDto entity)
         {
-            _userServices.Update(new User
+            await _userServices.UpdateAsync(new User
             {
                 Id = entity.Id,
                 Login = entity.Login,
@@ -62,9 +63,9 @@ namespace Minibank.Web.Controllers.Users
             });
         }
         [HttpDelete("Delete")]
-        public void Delete(string id)
+        public async Task DeleteAsync(int id)
         {
-            _userServices.Delete(id);
+            await _userServices.DeleteAsync(id);
         }
     }
 }

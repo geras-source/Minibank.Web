@@ -12,7 +12,7 @@ namespace Minibank.Core
 {
     public static class Bootstraps
     {
-        public static IServiceCollection AddCore(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCore(this IServiceCollection services)
         {
             services
                 .AddScoped<IConvector, Convector>()

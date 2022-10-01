@@ -8,8 +8,8 @@ namespace Minibank.Core.Domains.Account
 {
     public class BankAccount
     {
-        public string Id { get; set; }
-        public string UserId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         public double Amount { get; set; }
         public string Currency { get; set; }
         public bool IsClosed { get; set; }

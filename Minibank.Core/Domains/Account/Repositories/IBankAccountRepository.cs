@@ -9,11 +9,11 @@ namespace Minibank.Core.Domains.Account.Repositories
     public interface IBankAccountRepository
     {
         IEnumerable<BankAccount> GetAllAccounts();
-        HistoryOfMoneyTransfers GetAHistory(string id);
+        HistoryOfMoneyTransfers GetAHistory(int id);
         IEnumerable<HistoryOfMoneyTransfers> GetAllHistory();
         public void CreateAnAccount(BankAccount bankAccount);
-        public void CloseAnAccount(string id, BankAccount bankAccount);
-        public int CalculatingTheCommission(double amount, string fromAccountId, string toAccountId);
-        public void TransferAMoney(double amount, string fromAccountId, string toAccountId);
+        public void CloseAnAccount(int id, BankAccount bankAccount);
+        public int CalculatingTheCommission(double amount, int fromAccountId, int toAccountId);
+        public void TransferAMoney(double amount, int fromAccountId, int toAccountId);
     }
 }

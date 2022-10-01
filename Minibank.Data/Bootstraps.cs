@@ -6,6 +6,7 @@ using Minibank.Data.Users.Repositories;
 using Minibank.Core.Domains.Account.Repositories;
 using System;
 using Minibank.Data.Account.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Minibank.Data
 {
@@ -22,6 +23,13 @@ namespace Minibank.Data
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IBankAccountRepository, BankAccountRepository>();
 
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<ApplicationContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            }, ServiceLifetime.Transient);
+            
             return services;
         }
     }

@@ -7,8 +7,8 @@ namespace Minibank.Web.Controllers.Accounts
 {
     public class AccountDto
     {
-        public string Id { get; set; }
-        public string UserId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Currency { get; set; }
     }
 }

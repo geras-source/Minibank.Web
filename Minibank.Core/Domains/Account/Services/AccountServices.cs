@@ -11,7 +11,7 @@ namespace Minibank.Core.Domains.Account.Services
     {
         private readonly IBankAccountRepository _bankAccountRepository;
 
-        public HistoryOfMoneyTransfers GetAHistory(string id)
+        public HistoryOfMoneyTransfers GetAHistory(int id)
         {
             return _bankAccountRepository.GetAHistory(id);
         }
@@ -30,12 +30,12 @@ namespace Minibank.Core.Domains.Account.Services
         {
             _bankAccountRepository = bankAccountRepository;
         }
-        public int CalculatingTheCommission(double amount, string fromAccountId, string toAccountId)
+        public int CalculatingTheCommission(double amount, int fromAccountId, int toAccountId)
         {
             return _bankAccountRepository.CalculatingTheCommission(amount, fromAccountId, toAccountId);
         }
 
-        public void CloseAnAccount(string id, BankAccount bankAccount)
+        public void CloseAnAccount(int id, BankAccount bankAccount)
         {
             _bankAccountRepository.CloseAnAccount(id, bankAccount);
         }
@@ -45,7 +45,7 @@ namespace Minibank.Core.Domains.Account.Services
             _bankAccountRepository.CreateAnAccount(bankAccount);
         }
 
-        public void TransferAMoney(double amount, string fromAccountId, string toAccountId)
+        public void TransferAMoney(double amount, int fromAccountId, int toAccountId)
         {
             _bankAccountRepository.TransferAMoney(amount, fromAccountId, toAccountId);
         }

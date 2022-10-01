@@ -25,11 +25,11 @@ namespace Minibank.Data.Account.Repositories
         {
             if (bankAccount.Currency != "RUB" && bankAccount.Currency != "USD" && bankAccount.Currency != "EUR") { throw new ValidationException(); }
 
-            if (_userServices.Get(bankAccount.UserId) == null) { throw new Exception("Данного пользователя не существует"); }
+            if (_userServices.GetAsync(bankAccount.UserId) == null) { throw new Exception("Данного пользователя не существует"); }
 
             var entity = new BankAccountDbModel
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = 6,
                 UserId = bankAccount.UserId,
                 Amount = 500,
                 Currency = bankAccount.Currency,
@@ -52,7 +52,7 @@ namespace Minibank.Data.Account.Repositories
                 DateOfClosing = it.DateOfClosing
             });
         }
-        public HistoryOfMoneyTransfers GetAHistory(string id)
+        public HistoryOfMoneyTransfers GetAHistory(int id)
         {
             var entitiy = _historyDbModel.FirstOrDefault(it => it.Id == id);
 
@@ -78,7 +78,7 @@ namespace Minibank.Data.Account.Repositories
             });
         }
 
-        public int CalculatingTheCommission(double amount, string fromAccountId, string toAccountId) // заменить на userID
+        public int CalculatingTheCommission(double amount, int fromAccountId, int toAccountId) // заменить на userID
         {
             var fromEntity = _bankAccountDbModel.FirstOrDefault(it => it.Id == fromAccountId);
             var ToEntity = _bankAccountDbModel.FirstOrDefault(it => it.Id == toAccountId);
@@ -87,7 +87,7 @@ namespace Minibank.Data.Account.Repositories
 
             return (int)((int)amount * 0.02);
         }
-        public void TransferAMoney(double amount, string fromAccountId, string toAccountId)
+        public void TransferAMoney(double amount, int fromAccountId, int toAccountId)
         {
             var fromEntity = _bankAccountDbModel.FirstOrDefault(it => it.Id == fromAccountId);
             var ToEntity = _bankAccountDbModel.FirstOrDefault(it => it.Id == toAccountId);
@@ -107,7 +107,7 @@ namespace Minibank.Data.Account.Repositories
 
             var historyEntity = new HistoryDbModel
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = 5,//TODO:
                 Amount = amount,
                 Currency = fromEntity.Currency,
                 FromAccountId = fromAccountId,
@@ -117,7 +117,7 @@ namespace Minibank.Data.Account.Repositories
             _historyDbModel.Add(historyEntity);
         }
 
-        public void CloseAnAccount(string id, BankAccount bankAccount)
+        public void CloseAnAccount(int id, BankAccount bankAccount)
         {
             var entity = _bankAccountDbModel.FirstOrDefault(it => it.Id == id);
 
