@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Minibank.Web.Controllers.Users
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
@@ -20,7 +20,7 @@ namespace Minibank.Web.Controllers.Users
             _userServices = userServices;
         }
 
-        [HttpGet("Get")]
+        [HttpGet("Get/{id}")]
         public async Task<UserDto> GetAsync(int id)
         {
             var entity = await _userServices.GetAsync(id);
@@ -29,6 +29,7 @@ namespace Minibank.Web.Controllers.Users
 
             return new UserDto
             {
+                Id = entity.Id,
                 Login = entity.Login,
                 Email = entity.Email
             };
@@ -44,7 +45,7 @@ namespace Minibank.Web.Controllers.Users
             });
         }
         [HttpPost("Create")]
-        public async Task CreateAsync(UserDto entity)
+        public async Task CreateAsync([FromBody] UserDto entity)
         {
             await _userServices.CreateAsync(new User
             {
@@ -62,7 +63,7 @@ namespace Minibank.Web.Controllers.Users
                 Email = entity.Email
             });
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("{id}")]
         public async Task DeleteAsync(int id)
         {
             await _userServices.DeleteAsync(id);
