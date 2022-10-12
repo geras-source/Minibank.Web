@@ -18,18 +18,17 @@ namespace Minibank.Web.Controllers
             _convector = convector;
         }
         [HttpGet]
-        public int Get(int currency)
+        public double Get(double amount, string fromCurrency, string toCurrency)
         {
-            if (currency >= 0)
+            if (amount >= 0)
             {
-                var output = _convector.Convert(currency);
+                var output = _convector.Convert(amount, fromCurrency, toCurrency);
                 return output;
             }
             else
             {
-                throw new UserFriendlyException("Negative number");
+                throw new ValidationException("Negative number");
             }
-
         }
     }
 }

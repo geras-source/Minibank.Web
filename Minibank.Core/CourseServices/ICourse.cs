@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Minibank.Core
 {
-    public interface IConvector
+    public interface ICourse
     {
-        int Convert(int cash);
+        double GetRubleCourse(string currencyCode);
     }
 }

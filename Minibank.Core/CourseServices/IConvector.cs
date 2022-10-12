@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Minibank.Core
 {
-    public interface ICourse
+    public interface IConvector
     {
-        int Get();
+        double Convert(double amount, string fromCurrency, string toCurrency);
     }
 }
