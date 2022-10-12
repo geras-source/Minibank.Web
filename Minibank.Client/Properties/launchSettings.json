@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Minibank.Client": {
+      "commandName": "Project",
+      "commandLineArgs": "a b c"
+    }
+  }
+}
